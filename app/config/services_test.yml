@@ -1,0 +1,11 @@
+imports:
+    - { resource: services_dev.yml }
+
+phpunit:
+    class: Herrera\Silex\Test\PhpUnit
+
+session:
+    parameters:
+        session.test: true
+
+web_profiler: ~

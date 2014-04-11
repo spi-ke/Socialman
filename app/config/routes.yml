@@ -1,0 +1,14 @@
+index:
+    path: /
+    defaults:
+        _controller: Controller\Controller:indexView
+
+#example:
+#    path: /
+#    defaults:
+#        _controller: Example\Controller::nameView
+#
+#example_field_demo:
+#    path: /form
+#    defaults:
+#        _controller: Example\Controller::demoView

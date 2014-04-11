@@ -1,0 +1,45 @@
+{
+    "name": "herrera-io/go",
+    "description": "A simple PHP build tool.",
+    "keywords": ["build", "tool"],
+    "homepage": "http://herrera-io.github.com/php-go",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kevin Herrera",
+            "email": "kevin@herrera.io",
+            "homepage": "http://kevin.herrera.io"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/herrera-io/php-go/issues"
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "herrera-io/cli-app": "~2.0",
+        "herrera-io/service-update": "~1.0"
+    },
+    "require-dev": {
+        "ext-phar": "*",
+        "herrera-io/phpunit-test-case": "~1.0",
+        "herrera-io/service-process": "~1.0",
+        "phpunit/phpunit": "~3.7",
+        "symfony/process": "~2.1"
+    },
+    "autoload": {
+        "files": ["src/lib/functions.php"],
+        "psr-0": {
+            "Herrera\\Go": "src/lib"
+        }
+    },
+    "config": {
+        "bin-dir": "bin",
+        "vendor-dir": "src/vendors"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0-dev"
+        }
+    },
+    "bin": ["bin/go"]
+}
