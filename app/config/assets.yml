@@ -1,15 +1,9 @@
 web/assets/css/styles.min.css:
     - src/assets/css/bootstrap.css
-    - src/assets/css/bootstrap-responsive.css
-    - src/assets/css/font-awesome.css
-    - src/assets/css/common.css
-    - src/assets/css/input.css
-
-web/assets/css/ie7.min.css:
-    - src/assets/css/font-awesome-ie7.css
+    - src/assets/css/bootstrap-theme.css
+    - src/assets/css/flip.css
+    - src/assets/css/style.css
 
 web/assets/js/scripts.min.js:
-    - src/assets/js/jquery.js
-    - src/assets/js/jquery-migrate.js
     - src/assets/js/bootstrap.js
-    - src/assets/js/input.js
+    - src/assets/js/script.js

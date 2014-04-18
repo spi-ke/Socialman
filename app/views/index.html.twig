@@ -1,11 +1,110 @@
 {% extends "layout.html.twig" %}
 
 {% block content %}
-    <div class="container">
-        <div class="row-fluid">
-            <div class="span5 pull-both">
-                <h1 class="page-header">Socialman</h1>
+<!-- Top content of the page, logo socialman -->
+<div class="first">
+    <div class="row">
+        <div class="col-lg-6"></div>
+        <div class="col-lg-6 text-center">
+            <div class="logo-sm"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div id="logo"></div>
+        </div>
+    </div>
+    <div class="row spacer-80">
+        <div class="col-md-12 text-center">
+            <h4 class="dark-blue">Zavolat Socialmana?</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center social-links">
+            <a href="#"><span class="logo-fb"></span></a>
+            <a href="#"><span class="logo-tw"></span></a>
+            <a href="#"><span class="logo-g"></span></a>
+            <a href="#"><span class="logo-in"></span></a>
+            <a href="#"><span class="logo-email"></span></a>
+            <a href="#"><span class="logo-pi"></span></a>
+            <a href="#"><span class="logo-insta"></span></a>
+            <a href="#"><span class="logo-tumblr"></span></a>
+        </div>
+    </div>
+</div>
+<!-- second part of the page, contacts, contact form -->
+<div class="container second">
+    <div class="row">
+        <div class="col-lg-12 text-center light-blue">
+                <div class="spacer-50">
+                    <h2>Proč zavolat Socialmana</h2>
+                <p>
+                    Hlídám a rozvíjím firmám i jednotlivcům jejich profily na sociálních sítích.<br />
+                    Služba ideální pro ty, co zakládají vlastní nebo spravují firemní stránky a potřebují pár dobrých rad.
+                </p>
+
+                <p>
+                    Specializace na komunikační strategii značky přes sociální média. Tvorba a správa profilů na Facebooku,
+                    Twitteru, Google+, Linkedinu <br />
+                    a dalších sociálních sítích. Příprava cílených kampaní, konzultace, školení a workshopy.</p>
+                </div>
+        </div>
+    </div>
+
+    <div class="contact row">
+        <!-- social man info -->
+        <div class="col-md-4">
+            <div class="flip-panel" id="panel-avatar">
+                <div class="front card avatar">
+                </div>
+                <div class="back card avatar-back">  
+                </div>
+            </div>
+            <div class="light-blue">
+                <p>
+                    <small>
+                    mobil +420 775 634 709 <br />
+                    email dobros@socialman.cz <br />
+                    skype socialman
+                    </small>
+                </p>
+            </div>
+            <div class="social-links-small">
+            <a href="#"><span class="logo-fb-small"></span></a>
+            <a href="#"><span class="logo-tw-small"></span></a>
+            <a href="#"><span class="logo-g-small"></span></a>
+            <a href="#"><span class="logo-in-small"></span></a>
+            <a href="#"><span class="logo-email-small"></span></a>
+            <a href="#"><span class="logo-pi-small"></span></a>
+            <a href="#"><span class="logo-insta-small"></span></a>
+            <a href="#"><span class="logo-tumblr-small"></span></a>
+        </div>
+        </div>
+        <!-- contact form -->
+        <div class="col-md-8">
+            <div id="contact-form">
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="reference">
+                <a href=""><span class="logo-prace"></span></a>
+                <a href=""><span class="logo-holmes-place"></span></a>
+                <a href=""><span class="logo-svojtka"></span></a>
+                <a href=""><span class="logo-prace"></span></a>
+                <a href=""><span class="logo-holmes-place"></span></a>
+                <a href=""><span class="logo-svojtka"></span></a>
+            </div>
+        </div>
+    </div>
+    <!-- FOOTER -->
+        <footer>
+            <p>
+                Suspendisse a auctor nibh, ut consequat arcu. Vivamus in dignissim nulla. Suspendisse a auctor nibh, ut consequat arcu. Vivamus in dignissim nulla. Suspendisse a auctor nibh, ut consequat arcu.
+            </p>
+        </footer>  
+</div>  
 {% endblock %}
+

@@ -1,16 +1,13 @@
 <?php
 
-namespace Socialman;
+namespace Controller;
 
 use Herrera\Silex\Application;
-use Herrera\Silex\Form\Type\UneditableType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * A simple example controller.
  *
- * @author Kevin Herrera <kevin@herrera.io>
+ * @author Ales Zavadsky <zavadskya@gmail.com>
  */
 class Controller
 {
@@ -24,11 +21,14 @@ class Controller
      */
     public static function indexView(Application $app, Request $request)
     {
+
+
         return $app->render(
             'index.html.twig',
             array(
             )
         );
     }
+
 
 }

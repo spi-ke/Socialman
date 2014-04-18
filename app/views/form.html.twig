@@ -1,0 +1,316 @@
+{% block attrs %}
+{% for key, value in attr %} {{ key }}="{% if key in ["placeholder", "title"] %}{{ value|trans({}, translation_domain) }}{% else %}{{ value }}{% endif %}"{% endfor %}
+{% endblock %}
+
+{% block button_row %}
+  {% spaceless %}
+    <div class="form-actions">
+      {{ form_widget(form) }}
+    </div>
+  {% endspaceless %}
+{% endblock %}
+
+{% block button_widget %}
+  {% spaceless %}
+    {% if label is empty %}
+      {% set label = name|humanize %}
+    {% endif %}
+    {% set attr = attr|merge({"type": type|default("button")}) %}
+    {% set attr = attr|merge({"class": ("btn " ~ attr.class|default(""))|trim}) %}
+    <button{{ block('widget_attributes') }}>{{ label|trans({}, translation_domain) }}</button>
+  {% endspaceless %}
+{% endblock %}
+
+{% block choice_widget %}
+  {% spaceless %}
+    {% if expanded %}
+      {% for child in form %}
+        <label{{ block('widget_attributes', {"attr": child.vars.label_attr}) }}>
+          {{ form_widget(child) }}
+          {{ child.vars.label|trans({}, translation_domain) }}
+        </label>
+      {% endfor %}
+    {% else %}
+      {{ block('choice_widget_collapsed') }}
+    {% endif %}
+  {% endspaceless %}
+{% endblock %}
+
+{% block collection_widget %}
+  {% spaceless %}
+    <ul class="input-collection" id="{{ id }}" data-counter="0" data-prototype="{% if allow_delete %}&lt;div class=&quot;input-append&quot;&gt;{% endif %}{{ form_widget(prototype)|escape }}{% if allow_delete %} &lt;button class=&quot;btn btn-danger&quot; type=&quot;button&quot;&gt;&lt;i class=&quot;icon-minus-sign&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;/div&gt;{% endif %}">
+      {% if allow_add %}
+        <li class="input-add">
+          <button class="btn btn-success" type="button">
+            <i class="icon-plus-sign"></i>
+          </button>
+        </li>
+      {% endif %}
+    </ul>
+  {% endspaceless %}
+{% endblock %}
+
+{% block date_widget %}
+  {% spaceless %}
+    {% if widget == 'single_text' %}
+      {{ block('form_widget_simple') }}
+    {% else %}
+      <div class="input-merged">
+        {{ date_pattern|replace({
+            '{{ year }}': form_widget(form.year, {"attr": form.vars.attr|merge({"class": "input-mini", "placeholder": "date.year"|trans({}, translation_domain)})}),
+            '{{ month }}': form_widget(form.month, {"attr": form.vars.attr|merge({"class": "input-mini", "placeholder": "date.month"|trans({}, translation_domain)})}),
+            '{{ day }}': form_widget(form.day, {"attr": form.vars.attr|merge({"class": "input-mini", "placeholder": "date.day"|trans({}, translation_domain)})}),
+        })|raw }}
+      </div>
+    {% endif %}
+  {% endspaceless %}
+{% endblock %}
+
+{% block datetime_widget %}
+  {% spaceless %}
+    {% if widget == 'single_text' %}
+      {{ block('form_widget_simple') }}
+    {% else %}
+      <div class="input-merged">
+        {{ form.date.vars.date_pattern|replace({
+            '{{ year }}': form_widget(form.date.year, {"attr": form.vars.attr|merge({"placeholder": "date.year"|trans({}, translation_domain)})}),
+            '{{ month }}': form_widget(form.date.month, {"attr": form.vars.attr|merge({"placeholder": "date.month"|trans({}, translation_domain)})}),
+            '{{ day }}': form_widget(form.date.day, {"attr": form.vars.attr|merge({"placeholder": "date.day"|trans({}, translation_domain)})}),
+        })|raw }}
+      </div>
+      <br/>
+      {{ form_widget(form.time) }}
+    {% endif %}
+  {% endspaceless %}
+{% endblock %}
+
+{% block email_widget %}
+  {% spaceless %}
+    <div class="input-prepend">
+      <span class="add-on">
+        <label for="{{ id }}">
+          <i class="icon-envelope"></i>
+        </label>
+      </span>
+      {% set type = type|default("email") %}
+      {{ block("form_widget") }}
+    </div>
+  {% endspaceless %}
+{% endblock %}
+
+{% block form %}
+  {% spaceless %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+  {% endspaceless %}
+{% endblock %}
+
+{% block form_end %}
+  {% spaceless %}
+    {% if (not render_rest is defined) or render_rest %}
+      {{ form_rest(form) }}
+    {% endif %}
+    </form>
+  {% endspaceless %}
+{% endblock %}
+
+{% block form_errors %}
+  {% spaceless %}
+    {% if errors|length > 0 %}
+      <span class="help-block">
+        <ul>
+          {% for error in errors %}
+            <li class="text-error">{{ error.message }}</li>
+          {% endfor %}
+        </ul>
+      </span>
+    {% endif %}
+  {% endspaceless %}
+{% endblock %}
+
+{% block form_label %}
+  {% spaceless %}
+    {% if label is not sameas(false) %}
+      {% if not compound %}
+        {% set label_attr = label_attr|merge({'for': id}) %}
+      {% endif %}
+      {% if required %}
+        {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+      {% endif %}
+      {% if label is empty %}
+        {% set label = name|humanize %}
+      {% endif %}
+      {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' control-label')|trim}) %}
+      {% set attr = label_attr %}
+      <label{{ block("attrs", {"attr": label_attr}) }}>{{ label|trans({}, translation_domain) }}</label>
+    {% endif %}
+  {% endspaceless %}
+{% endblock %}
+
+{% block form_rest %}
+  {% spaceless %}
+    {% for child in form %}
+      {% if not child.rendered %}
+        {{ form_row(child) }}
+      {% endif %}
+    {% endfor %}
+  {% endspaceless %}
+{% endblock %}
+
+{% block form_row %}
+  {% spaceless %}
+    <div class="control-group">
+      {{ form_label(form) }}
+      <div class="controls controls-row">
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}
+      </div>
+    </div>
+  {% endspaceless %}
+{% endblock %}
+
+{% block form_rows %}
+  {% spaceless %}
+    {% for child in form %}
+      {{ form_row(child) }}
+    {% endfor %}
+  {% endspaceless %}
+{% endblock %}
+
+{% block form_start %}
+  {% spaceless %}
+    {% set method = method|upper %}
+    {% if method in ["GET", "POST"] %}
+      {% set attr = attr|merge({"method": method|lower}) %}
+    {% else %}
+      {% set attr = attr|merge({"method": "post"}) %}
+    {% endif %}
+    {% set attr = attr|merge({"action": action}) %}
+    {% set attr = attr|merge({"name": form.vars.name}) %}
+    {% set attr = attr|merge({"class": (attr.class|default("") ~ " form-horizontal")|trim}) %}
+    <form{{ block("attrs", {"attr": attr}) }}>
+      {% if method|lower != attr.method %}
+        <input type="hidden" name="_method" value="{{ attr.method }}"/>
+      {% endif %}
+  {% endspaceless %}
+{% endblock %}
+
+{% block form_widget_compound %}
+  {% spaceless %}
+    {{ block('form_rows') }}
+    {{ form_rest(form) }}
+  {% endspaceless %}
+{% endblock %}
+
+{% block form_widget_simple %}
+  {% spaceless %}
+    {% set attr = attr|merge({"type": type|default("text")}) %}
+    {% if value is not empty %}
+      {% set attr = attr|merge({"value": value}) %}
+    {% endif %}
+    {% set help = attr.help|default("") %}
+    <input{{ block("widget_attributes") }}/>
+  {% endspaceless %}
+{% endblock %}
+
+{% block money_widget %}
+  {% spaceless %}
+    <div class="input-prepend">
+      <span class="add-on">
+        <label for="{{ id }}">
+          {{ money_pattern|replace({"{{ widget }}": ""}) }}
+        </label>
+      </span>
+      {{ block("form_widget") }}
+    </div>
+  {% endspaceless %}
+{% endblock %}
+
+{% block percent_widget %}
+  {% spaceless %}
+    <div class="input-append">
+      {{ block("form_widget") }}
+      <span class="add-on">
+        <label for="{{ id }}">%</label>
+      </span>
+    </div>
+  {% endspaceless %}
+{% endblock %}
+
+{% block search_widget %}
+  {% spaceless %}
+    <div class="input-prepend">
+      <span class="add-on">
+        <label for="{{ id }}">
+          <i class="icon-search"></i>
+        </label>
+      </span>
+      {% set type = type|default("search") %}
+      {{ block("form_widget") }}
+    </div>
+  {% endspaceless %}
+{% endblock %}
+
+{% block time_widget %}
+  {% spaceless %}
+    {% if widget == 'single_text' %}
+      {{ block('form_widget_simple') }}
+    {% else %}
+      <div class="input-merged">
+        {{ form_widget(form.hour, {"attr": form.vars.attr|merge({"class": "input-mini", "placeholder": "time.hour"|trans({}, translation_domain)})}) }}
+        {% if with_minutes %}
+          :
+          {{ form_widget(form.minute, {"attr": form.vars.attr|merge({"class": "input-mini", "placeholder": "time.minute"|trans({}, translation_domain)})}) }}
+        {% endif %}
+        {% if with_seconds %}
+          :
+          {{ form_widget(form.second, {"attr": form.vars.attr|merge({"class": "input-mini", "placeholder": "time.second"|trans({}, translation_domain)})}) }}
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endspaceless %}
+{% endblock %}
+
+{% block url_widget %}
+  {% spaceless %}
+    <div class="input-prepend">
+      <span class="add-on">
+        <label for="{{ id }}">
+          <i class="icon-globe"></i>
+        </label>
+      </span>
+      {% set type = type|default("url") %}
+      {{ block("form_widget") }}
+    </div>
+  {% endspaceless %}
+{% endblock %}
+
+{% block uneditable_widget %}
+  {% spaceless %}
+    {% set attr = attr|merge({"class": (attr.class|default("") ~ " uneditable-input")|trim}) %}
+    <span{{ block("attrs") }}>{{ value }}</span>
+  {% endspaceless %}
+{% endblock %}
+
+{% block widget_attributes %}
+  {% spaceless %}
+    {% if disabled %}
+      {% set attr = attr|merge({"disabled": "disabled"}) %}
+    {% endif %}
+    {% if max_length is defined and max_length %}
+      {% set attr = attr|merge({"maxlength": max_length}) %}
+    {% endif %}
+    {% if pattern is defined and pattern %}
+      {% set attr = attr|merge({"pattern": pattern}) %}
+    {% endif %}
+    {% if read_only is defined and read_only %}
+      {% set attr = attr|merge({"readonly": "readonly"}) %}
+    {% endif %}
+    {% if required is defined and required %}
+      {% set attr = attr|merge({"required": "required"}) %}
+    {% endif %}
+    {% set attr = attr|merge({"id": id, "name": full_name}) %}
+    {{ block("attrs") }}
+  {% endspaceless %}
+{% endblock %}

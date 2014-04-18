@@ -20,7 +20,7 @@ class TestCase extends WebTestCase
         return Application::create(
             array(
                 'debug' => true,
-                'mode' => 'dev',
+                'mode' => 'test',
             )
         );
     }
