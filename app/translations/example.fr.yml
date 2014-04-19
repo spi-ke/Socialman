@@ -1,0 +1,11 @@
+hello: "Bonjour {name}!"
+
+date:
+    day: Jour
+    month: Mois
+    year: Année
+
+time:
+    hour: Heure
+    minute: Minute
+    second: Seconde

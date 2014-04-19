@@ -1,5 +1,6 @@
 body {
     font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
 }
 
 h2 {    
@@ -15,7 +16,32 @@ p {
 .dark-blue {    color:#0a5c71}
 .light-blue {   color:#1a95b9}
 .spacer-80 {    margin-top: 50px}
-
+.btn, .form-control {
+    border-radius: 0;
+}
+.btn {
+    padding: 8px 30px;
+    font-weight: lighter;
+    font-size: 16px;
+}
+.mailto {
+    font-weight: bold;
+    color:#1a95b9;
+}
+.form-control {
+    background-color: #f4f5f5;
+    outline: none;
+    border:none !important;
+    box-shadow:none !important;
+}
+.form-group {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.btn-primary {
+    background-color: #0a5c71;
+    border: 0;
+}
 #logo {
     height: 227px;
     background: url('../img/logo-lg.png') no-repeat center;
@@ -163,7 +189,7 @@ p {
     display: inline-block;
     background-image: url('../img/logo-holmes-place.png');
     width: 100px;
-    height: 41px;
+    height: 28px;
 }
 .logo-svojtka {
     display: inline-block;
