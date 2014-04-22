@@ -4,6 +4,7 @@ namespace Controller;
 
 use Herrera\Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  *
@@ -33,7 +34,7 @@ class Controller
                     'placeholder' => 'Jméno a příjmení',
                     'class' => 'form-control',
                 ),
-                // 'constraints' => new NotBlank(),
+                'constraints' => new NotBlank(),
                 'label' => ' '
             )
         );
@@ -117,6 +118,7 @@ class Controller
 
             if ($form->isValid()) {
                 $data = $form->getData();
+                var_dump($data);
                 // $this->sentEmail($data);
             }
         }
