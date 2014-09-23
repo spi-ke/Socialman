@@ -1,6 +1,8 @@
 Silex Bootstrap
 ===============
 
+[ ![Codeship Status for spi-ke/Socialman](https://www.codeship.io/projects/90b3bbb0-0d3b-0132-bc90-6a1e79364744/status)](https://www.codeship.io/projects/32286)
+
 [![Build Status][]](https://travis-ci.org/herrera-io/php-silex-bootstrap)
 
 This is a pre-made web application built on the [Silex][] micro-framework and
